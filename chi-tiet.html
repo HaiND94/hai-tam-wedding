@@ -62,22 +62,10 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #A54242 0%, #8B3A3A 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
             border: 5px solid #FFF9F5;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .photo-placeholder span {
-            opacity: 0.8;
-            text-align: center;
-            padding: 10px;
+            object-fit: cover;
+            object-position: center;
         }
 
         .couple-role-photo {
@@ -464,9 +452,7 @@
         <div class="couple-section-photo">
             <div class="couple-photos">
                 <div class="photo-container groom">
-                    <div class="photo-placeholder" id="groomPhoto">
-                        <span>Hoàng Nam</span>
-                    </div>
+                    <img src="./data-images/single_boy.JPG" alt="Hoàng Nam" class="photo-placeholder">
                     <div class="couple-role-photo">Trưởng Nam</div>
                     <h2>Hoàng Nam</h2>
                 </div>
@@ -474,9 +460,7 @@
                 <div class="happiness-symbol">囍</div>
 
                 <div class="photo-container bride">
-                    <div class="photo-placeholder" id="bridePhoto">
-                        <span>Thanh Tú</span>
-                    </div>
+                    <img src="./data-images/single-girl.JPG" alt="Thanh Tú" class="photo-placeholder">
                     <div class="couple-role-photo">Út Nữ</div>
                     <h2>Thanh Tú</h2>
                 </div>
