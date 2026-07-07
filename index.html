@@ -79,17 +79,66 @@
             background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            padding: 60px 40px;
+            padding: 20px 40px;
             text-align: center;
             z-index: 10;
             opacity: 0;
             transition: opacity 0.6s ease 0.3s;
+            overflow-y: auto;
         }
 
         .envelope.open .inner-card {
             opacity: 1;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            background: transparent;
+            border: none;
+            color: #FFD700;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .close-btn:hover {
+            opacity: 0.8;
+        }
+
+        .event-info {
+            margin: 15px 0;
+            font-size: 14px;
+            color: #FFE55C;
+            line-height: 1.8;
+        }
+
+        .event-info-row {
+            margin: 8px 0;
+        }
+
+        .event-label {
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        .message-btn {
+            margin-top: 15px;
+            padding: 8px 25px;
+            background: rgba(255, 229, 92, 0.2);
+            color: #FFE55C;
+            border: 2px solid #FFE55C;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .message-btn:hover {
+            background: rgba(255, 229, 92, 0.4);
+            transform: translateY(-2px);
         }
 
         .luck-coin {
@@ -237,43 +286,15 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        .icon:nth-child(1) {
-            top: 10%;
-            left: 8%;
-            animation-delay: 0s;
-        }
-
-        .icon:nth-child(2) {
-            top: 15%;
-            right: 12%;
-            animation-delay: 1s;
-        }
-
-        .icon:nth-child(3) {
-            top: 50%;
-            left: 5%;
-            animation-delay: 2s;
-        }
-
-        .icon:nth-child(4) {
-            bottom: 20%;
-            right: 8%;
-            animation-delay: 3s;
-        }
-
-        .icon:nth-child(5) {
-            bottom: 15%;
-            left: 15%;
-            animation-delay: 4s;
-        }
+        .icon:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; }
+        .icon:nth-child(2) { top: 15%; right: 12%; animation-delay: 1s; }
+        .icon:nth-child(3) { top: 50%; left: 5%; animation-delay: 2s; }
+        .icon:nth-child(4) { bottom: 20%; right: 8%; animation-delay: 3s; }
+        .icon:nth-child(5) { bottom: 15%; left: 15%; animation-delay: 4s; }
 
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         .falling-hearts {
@@ -304,75 +325,16 @@
             }
         }
 
-        .heart:nth-child(1) {
-            left: 10%;
-            animation-duration: 4s;
-            animation-delay: 0s;
-            font-size: 20px;
-        }
-
-        .heart:nth-child(2) {
-            left: 20%;
-            animation-duration: 5s;
-            animation-delay: 0.5s;
-            font-size: 18px;
-        }
-
-        .heart:nth-child(3) {
-            left: 30%;
-            animation-duration: 4.5s;
-            animation-delay: 1s;
-            font-size: 22px;
-        }
-
-        .heart:nth-child(4) {
-            left: 40%;
-            animation-duration: 5.5s;
-            animation-delay: 0.2s;
-            font-size: 19px;
-        }
-
-        .heart:nth-child(5) {
-            left: 50%;
-            animation-duration: 4.2s;
-            animation-delay: 0.8s;
-            font-size: 21px;
-        }
-
-        .heart:nth-child(6) {
-            left: 60%;
-            animation-duration: 5.2s;
-            animation-delay: 0.3s;
-            font-size: 20px;
-        }
-
-        .heart:nth-child(7) {
-            left: 70%;
-            animation-duration: 4.8s;
-            animation-delay: 1.2s;
-            font-size: 22px;
-        }
-
-        .heart:nth-child(8) {
-            left: 80%;
-            animation-duration: 5.5s;
-            animation-delay: 0.6s;
-            font-size: 18px;
-        }
-
-        .heart:nth-child(9) {
-            left: 90%;
-            animation-duration: 4.3s;
-            animation-delay: 0.9s;
-            font-size: 21px;
-        }
-
-        .heart:nth-child(10) {
-            left: 15%;
-            animation-duration: 5.3s;
-            animation-delay: 1.5s;
-            font-size: 19px;
-        }
+        .heart:nth-child(1) { left: 10%; animation-duration: 4s; animation-delay: 0s; font-size: 20px; }
+        .heart:nth-child(2) { left: 20%; animation-duration: 5s; animation-delay: 0.5s; font-size: 18px; }
+        .heart:nth-child(3) { left: 30%; animation-duration: 4.5s; animation-delay: 1s; font-size: 22px; }
+        .heart:nth-child(4) { left: 40%; animation-duration: 5.5s; animation-delay: 0.2s; font-size: 19px; }
+        .heart:nth-child(5) { left: 50%; animation-duration: 4.2s; animation-delay: 0.8s; font-size: 21px; }
+        .heart:nth-child(6) { left: 60%; animation-duration: 5.2s; animation-delay: 0.3s; font-size: 20px; }
+        .heart:nth-child(7) { left: 70%; animation-duration: 4.8s; animation-delay: 1.2s; font-size: 22px; }
+        .heart:nth-child(8) { left: 80%; animation-duration: 5.5s; animation-delay: 0.6s; font-size: 18px; }
+        .heart:nth-child(9) { left: 90%; animation-duration: 4.3s; animation-delay: 0.9s; font-size: 21px; }
+        .heart:nth-child(10) { left: 15%; animation-duration: 5.3s; animation-delay: 1.5s; font-size: 19px; }
 
         @media (max-width: 600px) {
             .envelope {
@@ -380,18 +342,9 @@
                 height: auto;
                 min-height: 400px;
             }
-
-            .names {
-                font-size: 32px;
-            }
-
-            .names small {
-                font-size: 18px;
-            }
-
-            .invitation-text {
-                font-size: 12px;
-            }
+            .names { font-size: 32px; }
+            .names small { font-size: 18px; }
+            .invitation-text { font-size: 12px; }
         }
     </style>
 </head>
@@ -442,9 +395,11 @@
 
             <!-- Card Page (Inside) -->
             <div class="inner-card">
-                <div class="luck-coin">囍</div>
+                <button class="close-btn" onclick="closeEnvelope()">✕</button>
 
-                <div class="names">
+                <div class="luck-coin" style="margin-top: 10px;">囍</div>
+
+                <div class="names" style="margin: 10px 0;">
                     <small>Đình Hải</small>
                     <div class="ampersand">&</div>
                     <small>Huệ Tâm</small>
@@ -460,17 +415,27 @@
                     cùng gia đình
                 </div>
 
-                <div class="date" id="date">
-                    <!-- Date will be set by JavaScript -->
+                <div class="event-info">
+                    <div class="event-info-row">
+                        <span class="event-label">📅 Ngày:</span><br>
+                        <span id="eventDate"></span>
+                    </div>
+                    <div class="event-info-row">
+                        <span class="event-label">🕐 Giờ:</span><br>
+                        <span>10:00 sáng</span>
+                    </div>
+                    <div class="event-info-row">
+                        <span class="event-label">📍 Địa điểm:</span><br>
+                        <span id="eventLocation">Nhà hàng Tiệc Cưới</span>
+                    </div>
                 </div>
 
-                <button class="open-btn" onclick="closeEnvelope()">Đóng thiệp</button>
+                <button class="message-btn" onclick="sendMessage()">💬 Gửi lời chúc</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Get guest name from URL parameter
         function getGuestName() {
             const params = new URLSearchParams(window.location.search);
             return params.get('moi') || 'Quý vị';
@@ -490,7 +455,6 @@
             invitationPage.classList.remove('hidden');
         }
 
-        // Set current date in Vietnamese format
         function setDate() {
             const today = new Date();
             const day = today.getDate();
@@ -498,23 +462,27 @@
             const year = today.getFullYear();
 
             const vietnameseDateText = `${day} tháng ${month}, ${year}`;
-            document.getElementById('date').textContent = vietnameseDateText;
+            document.getElementById('eventDate').textContent = vietnameseDateText;
         }
 
-        // Set guest name
         function setGuestName() {
             const guestName = getGuestName();
             document.getElementById('guestName').textContent = guestName;
             document.getElementById('recipientName').textContent = guestName;
         }
 
-        // Initialize
+        function sendMessage() {
+            const guestName = getGuestName();
+            const message = `Cảm ơn lời mời. Tôi sẽ có mặt trong ngày trọng đại của Đình Hải & Huệ Tâm.`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         window.addEventListener('load', function() {
             setDate();
             setGuestName();
         });
 
-        // Optional: Add keyboard shortcut to open/close
         document.addEventListener('keydown', function(event) {
             const envelope = document.getElementById('envelope');
             if (event.key === 'Enter') {
