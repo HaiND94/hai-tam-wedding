@@ -87,12 +87,17 @@
             opacity: 0;
             transition: opacity 0.6s ease 0.3s;
             overflow-y: auto;
+            
+            /* 🔴 THÊM DÒNG NÀY: Để click xuyên qua lớp này khi nó đang ẩn */
+            pointer-events: none; 
         }
 
         .envelope.open .inner-card {
             opacity: 1;
+            
+            /* 🔴 THÊM DÒNG NÀY: Kích hoạt lại tương tác chuột khi thiệp mở ra */
+            pointer-events: auto; 
         }
-
         .close-btn {
             align-self: flex-end;
             background: transparent;
@@ -325,6 +330,50 @@
             }
         }
 
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes starFall {
+            0% {
+                top: -50px;
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+                transform: translateX(var(--tx, 0px));
+            }
+        }
+
+        .sparkle-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .falling-star {
+            position: absolute;
+            font-size: 24px;
+            animation: starFall linear forwards;
+            filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.8));
+        }
+
+        .falling-star::before {
+            content: attr(data-star);
+            animation: sparkle 0.6s ease-in-out infinite;
+        }
+
         .heart:nth-child(1) { left: 10%; animation-duration: 4s; animation-delay: 0s; font-size: 20px; }
         .heart:nth-child(2) { left: 20%; animation-duration: 5s; animation-delay: 0.5s; font-size: 18px; }
         .heart:nth-child(3) { left: 30%; animation-duration: 4.5s; animation-delay: 1s; font-size: 22px; }
@@ -336,6 +385,50 @@
         .heart:nth-child(9) { left: 90%; animation-duration: 4.3s; animation-delay: 0.9s; font-size: 21px; }
         .heart:nth-child(10) { left: 15%; animation-duration: 5.3s; animation-delay: 1.5s; font-size: 19px; }
 
+        .countdown {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 229, 92, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .countdown-title {
+            font-size: 14px;
+            color: #FFE55C;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .countdown-items {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 45px;
+        }
+
+        .countdown-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #FFD700;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            color: #FFE55C;
+            margin-top: 3px;
+            text-transform: uppercase;
+        }
+
         @media (max-width: 600px) {
             .envelope {
                 width: 90%;
@@ -345,6 +438,8 @@
             .names { font-size: 32px; }
             .names small { font-size: 18px; }
             .invitation-text { font-size: 12px; }
+            .countdown-value { font-size: 18px; }
+            .countdown-label { font-size: 10px; }
         }
     </style>
 </head>
@@ -390,7 +485,7 @@
                     đến dự buổi tiệc chung vui<br>
                     cùng gia đình
                 </div>
-                <a href="chi-tiet.html" id="openLink" class="open-btn" style="margin-top: 30px; text-decoration: none; display: inline-block;">Mở thiệp</a>
+                <button id="openLink" class="open-btn" style="margin-top: 30px;" onclick="openWithAnimation()">Mở thiệp</button>
             </div>
 
             <!-- Card Page (Inside) -->
@@ -430,6 +525,28 @@
                     </div>
                 </div>
 
+                <div class="countdown">
+                    <div class="countdown-title">Còn lại</div>
+                    <div class="countdown-items">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">0</div>
+                            <div class="countdown-label">Ngày</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">0</div>
+                            <div class="countdown-label">Giờ</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">0</div>
+                            <div class="countdown-label">Phút</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">0</div>
+                            <div class="countdown-label">Giây</div>
+                        </div>
+                    </div>
+                </div>
+
                 <button class="message-btn" onclick="sendMessage()">💬 Gửi lời chúc</button>
             </div>
         </div>
@@ -444,9 +561,9 @@
         function openEnvelope() {
             const guestName = getGuestName();
             if (guestName && guestName !== 'Quý vị') {
-                window.location.href = 'chi-tiet.html?moi=' + encodeURIComponent(guestName);
+                window.location.href = 'detail.html?moi=' + encodeURIComponent(guestName);
             } else {
-                window.location.href = 'chi-tiet.html';
+                window.location.href = 'detail.html';
             }
         }
 
@@ -457,13 +574,47 @@
             invitationPage.classList.remove('hidden');
         }
 
-        function setDate() {
-            const today = new Date();
-            const day = today.getDate();
-            const month = today.getMonth() + 1;
-            const year = today.getFullYear();
+        function openWithAnimation() {
+            const overlay = document.createElement('div');
+            overlay.className = 'sparkle-overlay';
 
-            const vietnameseDateText = `${day} tháng ${month}, ${year}`;
+            const starSymbols = ['✨', '⭐', '🌟', '💫', '✨'];
+            const starCount = 30;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'falling-star';
+                const starSymbol = starSymbols[Math.floor(Math.random() * starSymbols.length)];
+                star.setAttribute('data-star', starSymbol);
+                star.textContent = starSymbol;
+
+                const startLeft = Math.random() * 100;
+                const duration = 1.5 + Math.random() * 1;
+                const delay = Math.random() * 0.3;
+                const horizontalShift = (Math.random() - 0.5) * 200;
+
+                star.style.left = startLeft + '%';
+                star.style.setProperty('--tx', horizontalShift + 'px');
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = delay + 's';
+
+                overlay.appendChild(star);
+            }
+
+            document.body.appendChild(overlay);
+
+            const guestName = getGuestName();
+            setTimeout(() => {
+                if (guestName && guestName !== 'Quý vị') {
+                    window.location.href = 'detail.html?moi=' + encodeURIComponent(guestName);
+                } else {
+                    window.location.href = 'detail.html';
+                }
+            }, 2500);
+        }
+
+        function setDate() {
+            const vietnameseDateText = `30 tháng 7, 2026`;
             document.getElementById('eventDate').textContent = vietnameseDateText;
         }
 
@@ -480,20 +631,35 @@
             window.open(whatsappUrl, '_blank');
         }
 
+        function updateCountdown() {
+            const weddingDate = new Date('2026-07-30T10:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
         window.addEventListener('load', function() {
             setDate();
             setGuestName();
-
-            // Set the link href with guest name parameter
-            const guestName = getGuestName();
-            const openLink = document.getElementById('openLink');
-            if (openLink) {
-                if (guestName && guestName !== 'Quý vị') {
-                    openLink.href = 'chi-tiet.html?moi=' + encodeURIComponent(guestName);
-                } else {
-                    openLink.href = 'chi-tiet.html';
-                }
-            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
         });
 
         document.addEventListener('keydown', function(event) {

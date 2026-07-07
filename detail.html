@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết Thiệp Cưới - Hoàng Nam & Thanh Tú</title>
+    <title>Chi tiết Thiệp Cưới - Đình Hải & Huệ Tâm</title>
     <style>
         * {
             margin: 0;
@@ -91,6 +91,55 @@
             align-items: center;
             margin: 0 30px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 30px;
+        }
+
+        .countdown-title {
+            font-size: 12px;
+            color: #A54242;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .countdown-items {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #FFF9F5;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #E8D7CD;
+        }
+
+        .countdown-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #A54242;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 9px;
+            color: #A54242;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .event-banner {
@@ -452,17 +501,38 @@
         <div class="couple-section-photo">
             <div class="couple-photos">
                 <div class="photo-container groom">
-                    <img src="./data-images/single_boy.JPG" alt="Hoàng Nam" class="photo-placeholder">
+                    <img src="./data-images/single_boy.JPG" alt="Đình Hải" class="photo-placeholder">
                     <div class="couple-role-photo">Trưởng Nam</div>
-                    <h2>Hoàng Nam</h2>
+                    <h2>Đình Hải</h2>
                 </div>
 
-                <div class="happiness-symbol">囍</div>
+                <div class="countdown-wrapper">
+                    <div class="happiness-symbol">囍</div>
+                    <div class="countdown-title">Còn lại</div>
+                    <div class="countdown-items">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">0</div>
+                            <div class="countdown-label">Ngày</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">0</div>
+                            <div class="countdown-label">Giờ</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">0</div>
+                            <div class="countdown-label">Phút</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">0</div>
+                            <div class="countdown-label">Giây</div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="photo-container bride">
-                    <img src="./data-images/single-girl.JPG" alt="Thanh Tú" class="photo-placeholder">
+                    <img src="./data-images/single_girl.JPG" alt="Huệ Tâm" class="photo-placeholder">
                     <div class="couple-role-photo">Út Nữ</div>
-                    <h2>Thanh Tú</h2>
+                    <h2>Huệ Tâm</h2>
                 </div>
             </div>
             <div class="event-banner">THÔNG TIN LỄ CƯỚI</div>
@@ -476,10 +546,10 @@
             </div>
             <div class="event-detail">
                 <span class="event-detail-label">Vào Lúc</span>
-                <span id="eventTime">09:00</span>
+                <span id="eventTime">11:30</span>
             </div>
             <div class="event-time" id="eventDate"></div>
-            <p style="font-size: 12px; color: #A54242; margin-top: 15px;" id="lunarDate">(Tức ngày 14/12 năm Ất Tỵ)</p>
+            <p style="font-size: 12px; color: #A54242; margin-top: 15px;" id="lunarDate">(Tức ngày 17/06 năm Bính Ngọ)</p>
         </div>
 
         <!-- Calendar Section -->
@@ -566,7 +636,7 @@
         <div class="footer">
             <div class="footer-dragon"></div>
             <p>Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!</p>
-            <p style="margin-top: 15px; font-size: 12px;">♡ chungdoi.com</p>
+            <p style="margin-top: 15px; font-size: 17px;">H♡T</p>
         </div>
     </div>
 
@@ -605,12 +675,12 @@
         }
 
         function setEventDate() {
-            const eventDate = new Date(2026, 1, 1); // February 1, 2026
+            const eventDate = new Date(2026, 7, 30); // July 30, 2026
             const day = eventDate.getDate();
-            const month = eventDate.getMonth() + 1;
+            const month = eventDate.getMonth();
             const year = eventDate.getFullYear();
 
-            document.getElementById('eventDate').textContent = `CHỦ NHẬT ${day} THÁNG ${month} ${year}`;
+            document.getElementById('eventDate').textContent = `THỨ 5, NGÀY ${day} THÁNG ${month} ${year}`;
         }
 
         // Load wishes from localStorage
@@ -712,10 +782,36 @@
             alert('Chúc mừng! 🧧');
         }
 
+        function updateCountdown() {
+            const weddingDate = new Date('2026-07-30T10:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
         window.addEventListener('load', function() {
             generateCalendar();
             setEventDate();
             loadWishes();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
         });
     </script>
 </body>
