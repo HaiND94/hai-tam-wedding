@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết Thiệp Cưới - Đình Hải & Huệ Tâm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -77,11 +78,13 @@
         }
 
         .photo-container h2 {
-            font-size: 28px;
+            font-size: 36px;
             color: #8B3A3A;
-            font-weight: 400;
-            letter-spacing: 2px;
+            font-weight: 700;
+            letter-spacing: 1px;
             margin: 5px 0;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .happiness-symbol {
@@ -146,7 +149,7 @@
             background: #A54242;
             color: white;
             padding: 12px 0;
-            font-size: 16px;
+            font-size: 18px;
             letter-spacing: 3px;
             font-weight: bold;
             text-transform: uppercase;
@@ -154,11 +157,12 @@
             margin-left: -30px;
             margin-right: -30px;
             margin-bottom: -40px;
+            font-family: 'Cormorant Garamond', serif;
         }
 
         /* Event Info Section */
         .event-section {
-            padding: 40px 30px;
+            padding: 50px 30px;
             text-align: center;
             background: white;
             border-bottom: 2px solid #E8D7CD;
@@ -166,10 +170,139 @@
 
         .event-title {
             color: #A54242;
-            font-size: 14px;
+            font-size: 20px;
             letter-spacing: 2px;
             margin-bottom: 20px;
             text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .parents-section {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 50px;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .parents-column {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .parents-label {
+            color: #A54242;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .parent-name {
+            color: #8B3A3A;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .center-separator {
+            width: 2px;
+            height: 60px;
+            background: #A54242;
+            margin: 0 20px;
+            align-self: center;
+        }
+
+        .couple-names {
+            margin-bottom: 50px;
+        }
+
+        .couple-name-groom {
+            color: #8B3A3A;
+            font-size: 48px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .couple-role {
+            color: #A54242;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .couple-symbol {
+            font-size: 40px;
+            color: #A54242;
+            margin: 20px 0;
+        }
+
+        .couple-name-bride {
+            color: #8B3A3A;
+            font-size: 48px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .wedding-details {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #E8D7CD;
+        }
+
+        .wedding-detail-title {
+            color: #8B3A3A;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .wedding-time {
+            color: #A54242;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .wedding-date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #8B3A3A;
+            font-weight: bold;
+        }
+
+        .wedding-date-divider {
+            color: #A54242;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .wedding-year {
+            color: #8B3A3A;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .lunar-date {
+            color: #A54242;
+            font-size: 12px;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         .event-detail {
@@ -274,10 +407,12 @@
 
         .timeline-title {
             color: #A54242;
-            font-size: 14px;
+            font-size: 20px;
             letter-spacing: 2px;
             margin-bottom: 30px;
             text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
 
         .timeline {
@@ -313,6 +448,97 @@
             flex: 1;
         }
 
+        /* Album Section */
+        .album-section {
+            padding: 40px 30px;
+            text-align: center;
+            background: white;
+            border-bottom: 2px solid #E8D7CD;
+        }
+
+        .album-title {
+            color: #A54242;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Album Slideshow */
+        .album-slideshow {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #FFF9F5;
+            border: 3px solid #A54242;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .slideshow-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(15px);
+            z-index: 1;
+            transition: background-image 0.8s ease-in-out;
+        }
+
+        .slide-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .slide-current {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-current img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            animation: slideTransition 0.8s ease-in-out;
+            border-radius: 4px;
+        }
+
+        @keyframes slideTransition {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
         /* Guest Book Section */
         .guest-book-section {
             padding: 40px 30px;
@@ -323,10 +549,12 @@
 
         .guest-book-title {
             color: #A54242;
-            font-size: 14px;
+            font-size: 20px;
             letter-spacing: 2px;
             margin-bottom: 30px;
             text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
 
         .guest-book-form {
@@ -423,10 +651,12 @@
 
         .envelope-title {
             color: #A54242;
-            font-size: 14px;
+            font-size: 20px;
             letter-spacing: 2px;
             margin-bottom: 30px;
             text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
 
         .envelope-card {
@@ -476,6 +706,45 @@
             margin-bottom: 20px;
         }
 
+        /* Music Control Button */
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            background: #A54242;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-toggle:hover {
+            background: #8B3A3A;
+            transform: scale(1.1);
+        }
+
+        .music-toggle.playing {
+            animation: musicPulse 0.6s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(165, 66, 66, 0.4);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(165, 66, 66, 0.8);
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .couple-names {
@@ -493,6 +762,15 @@
     </style>
 </head>
 <body>
+    <!-- Background Music -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="./music/cuoi_di.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button class="music-toggle playing" id="musicToggle" title="Bật/Tắt nhạc">🎵</button>
+
     <div class="container">
         <!-- Dragon Header -->
         <div class="dragon-header"></div>
@@ -540,16 +818,50 @@
 
         <!-- Event Section -->
         <div class="event-section">
-            <div class="event-title">Lễ Thành Hôn Được Cử Hành Tại</div>
-            <div class="event-detail">
-                <span class="event-detail-label">Tư Gia</span>
+            <!-- <div class="event-title">Thông Tin Lễ Cưới</div> -->
+
+            <!-- Parents Section -->
+            <div class="parents-section">
+                <div class="parents-column">
+                    <div class="parents-label">Ông bà</div>
+                    <div class="parent-name">Trần Văn Tuấn</div>
+                    <div class="parent-name">Trần Thị Mai</div>
+                </div>
+                <div class="center-separator"></div>
+                <div class="parents-column">
+                    <div class="parents-label">Ông bà</div>
+                    <div class="parent-name">Lê Văn Hùng</div>
+                    <div class="parent-name">Hồ Thị Lan</div>
+                </div>
             </div>
-            <div class="event-detail">
-                <span class="event-detail-label">Vào Lúc</span>
-                <span id="eventTime">11:30</span>
+
+            <!-- Couple Section -->
+            <div class="couple-names">
+                <div class="couple-role">Trưởng Nam</div>
+                <div class="couple-name-groom">Đình Hải</div>
+
+                <div class="couple-symbol">&</div>
+
+                <div class="couple-name-bride">Huệ Tâm</div>
+                <div class="couple-role">Út Nữ</div>
             </div>
-            <div class="event-time" id="eventDate"></div>
-            <p style="font-size: 12px; color: #A54242; margin-top: 15px;" id="lunarDate">(Tức ngày 17/06 năm Bính Ngọ)</p>
+
+            <!-- Wedding Details -->
+            <div class="wedding-details">
+                <div class="wedding-detail-title">Lễ Thành Hôn Được Cử Hành Tại Tự Gia</div>
+                <div class="wedding-time">Vào Lúc <span id="eventTime">11:30</span></div>
+
+                <div class="wedding-date">
+                    <span>Chủ Nhật</span>
+                    <span class="wedding-date-divider">|</span>
+                    <span id="eventDay">30</span>
+                    <span class="wedding-date-divider">|</span>
+                    <span>Tháng <span id="eventMonth">07</span></span>
+                </div>
+
+                <div class="wedding-year" id="eventYear">2026</div>
+                <div class="lunar-date" id="lunarDate">(Tức ngày 17/06 năm Bính Ngọ)</div>
+            </div>
         </div>
 
         <!-- Calendar Section -->
@@ -572,7 +884,7 @@
 
         <!-- Timeline Section -->
         <div class="timeline-section">
-            <div class="timeline-title">Lịch Trình Ngày Cưới</div>
+            <div class="event-banner">Lịch Trình Ngày Cưới</div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-time">17:30</div>
@@ -602,9 +914,24 @@
             </div>
         </div>
 
+        <!-- Album Section -->
+        <div class="album-section">
+            <div class="event-banner">Album Ảnh Cưới</div>
+            <div class="album-slideshow">
+                <div class="slideshow-container">
+                    <div class="slideshow-background" id="bgImage"></div>
+                    <div class="slide-wrapper">
+                        <div class="slide-current" id="slideCurrentWrapper">
+                            <!-- Current slide will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Guest Book Section -->
         <div class="guest-book-section">
-            <div class="guest-book-title">Sổ Lưu Bút</div>
+            <div class="event-banner">Sổ Lưu Bút</div>
             <div class="guest-book-form">
                 <div class="form-group">
                     <label>Tên của bạn *</label>
@@ -625,7 +952,7 @@
 
         <!-- Red Envelope Section -->
         <div class="envelope-section">
-            <div class="envelope-title">Phong Bao Mừng Cưới</div>
+            <div class="event-banner">Phong Bao Mừng Cưới</div>
             <div class="envelope-card" onclick="openEnvelope()">
                 <div class="envelope-symbol">💰</div>
                 <div class="envelope-text">Nhân để mở</div>
@@ -675,12 +1002,14 @@
         }
 
         function setEventDate() {
-            const eventDate = new Date(2026, 7, 30); // July 30, 2026
+            const eventDate = new Date(2026, 6, 30); // July 30, 2026 (month is 0-indexed)
             const day = eventDate.getDate();
-            const month = eventDate.getMonth();
+            const month = eventDate.getMonth() + 1; // Add 1 because getMonth() returns 0-11
             const year = eventDate.getFullYear();
 
-            document.getElementById('eventDate').textContent = `THỨ 5, NGÀY ${day} THÁNG ${month} ${year}`;
+            document.getElementById('eventDay').textContent = day;
+            document.getElementById('eventMonth').textContent = String(month).padStart(2, '0');
+            document.getElementById('eventYear').textContent = year;
         }
 
         // Load wishes from localStorage
@@ -806,12 +1135,105 @@
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
 
+        // Album photos
+        const albumPhotos = [
+            'BIN09121.JPG',
+            'BIN09139.JPG',
+            'BIN09168.JPG',
+            'BIN09182.JPG',
+            'BIN09195.JPG',
+            'BIN09209.JPG',
+            'BIN09263.JPG',
+            'BIN09265.JPG',
+            'BIN09298.JPG',
+            'BIN09302.JPG',
+            'BIN09405.JPG',
+            'BIN09421.JPG',
+            'BIN09451.JPG',
+            'BIN09616.JPG',
+            'BIN09624.JPG',
+            'BIN09663.JPG',
+            'BIN09724.JPG',
+            'BIN09747.JPG',
+            'BIN09840.JPG',
+            'BIN09861.JPG'
+        ];
+
+        let currentSlideIndex = 0;
+        const autoPlayDelay = 4000; // 4 seconds
+
+        function loadAlbum() {
+            showSlides();
+        }
+
+        function getNextIndex(index) {
+            return (index + 1) % albumPhotos.length;
+        }
+
+        function showSlides() {
+            const currentPhoto = albumPhotos[currentSlideIndex];
+            const nextIndex = getNextIndex(currentSlideIndex);
+            const nextPhoto = albumPhotos[nextIndex];
+
+            // Update current slide in foreground
+            const slideCurrentWrapper = document.getElementById('slideCurrentWrapper');
+            slideCurrentWrapper.innerHTML = `<img src="./data-images/${currentPhoto}" alt="Ảnh cưới ${currentSlideIndex + 1}">`;
+
+            // Update background with blurred next image (as transition effect)
+            const bgImage = document.getElementById('bgImage');
+            bgImage.style.backgroundImage = `url('./data-images/${nextPhoto}')`;
+        }
+
+        function nextSlide() {
+            currentSlideIndex = getNextIndex(currentSlideIndex);
+            showSlides();
+        }
+
+        function startAutoPlay() {
+            setInterval(nextSlide, autoPlayDelay);
+        }
+
+        // Music Control
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+
+        // Attempt to autoplay music
+        function playMusic() {
+            const playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        musicToggle.classList.add('playing');
+                    })
+                    .catch(() => {
+                        // Autoplay prevented, user needs to interact first
+                        musicToggle.classList.remove('playing');
+                    });
+            }
+        }
+
+        // Toggle music on button click
+        musicToggle.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                musicToggle.classList.add('playing');
+            } else {
+                backgroundMusic.pause();
+                musicToggle.classList.remove('playing');
+            }
+        });
+
         window.addEventListener('load', function() {
             generateCalendar();
             setEventDate();
             loadWishes();
+            loadAlbum();
+            startAutoPlay();
             updateCountdown();
             setInterval(updateCountdown, 1000);
+
+            // Try to autoplay music after page loads
+            setTimeout(playMusic, 1000);
         });
     </script>
 </body>
