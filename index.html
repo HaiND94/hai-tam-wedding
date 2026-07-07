@@ -442,22 +442,12 @@
         }
 
         function openEnvelope() {
-            const envelope = document.getElementById('envelope');
-            const invitationPage = document.getElementById('invitationPage');
-
-            // Add opening animation
-            envelope.classList.add('open');
-            invitationPage.classList.add('hidden');
-
-            // Navigate to detail page after animation (600ms)
-            setTimeout(() => {
-                const guestName = getGuestName();
-                if (guestName && guestName !== 'Quý vị') {
-                    window.location.href = `chi-tiet.html?moi=${encodeURIComponent(guestName)}`;
-                } else {
-                    window.location.href = 'chi-tiet.html';
-                }
-            }, 600);
+            const guestName = getGuestName();
+            if (guestName && guestName !== 'Quý vị') {
+                window.location.href = 'chi-tiet.html?moi=' + encodeURIComponent(guestName);
+            } else {
+                window.location.href = 'chi-tiet.html';
+            }
         }
 
         function closeEnvelope() {
