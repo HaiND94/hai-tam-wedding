@@ -390,7 +390,7 @@
                     đến dự buổi tiệc chung vui<br>
                     cùng gia đình
                 </div>
-                <button class="open-btn" onclick="openEnvelope()" style="margin-top: 30px;">Mở thiệp</button>
+                <a href="chi-tiet.html" id="openLink" class="open-btn" style="margin-top: 30px; text-decoration: none; display: inline-block;">Mở thiệp</a>
             </div>
 
             <!-- Card Page (Inside) -->
@@ -483,6 +483,17 @@
         window.addEventListener('load', function() {
             setDate();
             setGuestName();
+
+            // Set the link href with guest name parameter
+            const guestName = getGuestName();
+            const openLink = document.getElementById('openLink');
+            if (openLink) {
+                if (guestName && guestName !== 'Quý vị') {
+                    openLink.href = 'chi-tiet.html?moi=' + encodeURIComponent(guestName);
+                } else {
+                    openLink.href = 'chi-tiet.html';
+                }
+            }
         });
 
         document.addEventListener('keydown', function(event) {
