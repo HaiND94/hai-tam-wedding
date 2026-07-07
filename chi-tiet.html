@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Thiệp Cưới - Đình Hải & Huệ Tâm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', Georgia, serif;
+            background: linear-gradient(135deg, #8B0000 0%, #5C0000 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #FFD700;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: relative;
+            width: 500px;
+            height: 480px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px 40px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .dragon-left {
+            position: absolute;
+            left: -50px;
+            top: -80px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M50,50 Q100,20 150,50 T200,100" stroke="%23FFD700" stroke-width="2" fill="none"/><circle cx="150" cy="60" r="8" fill="%23FFD700"/></svg>');
+            background-repeat: repeat;
+        }
+
+        .dragon-right {
+            position: absolute;
+            right: -50px;
+            bottom: -80px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+            transform: scaleX(-1) scaleY(-1);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M50,50 Q100,20 150,50 T200,100" stroke="%23FFD700" stroke-width="2" fill="none"/><circle cx="150" cy="60" r="8" fill="%23FFD700"/></svg>');
+            background-repeat: repeat;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            background: transparent;
+            border: none;
+            color: #FFD700;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .close-btn:hover {
+            opacity: 0.8;
+        }
+
+        .luck-coin {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #FFE55C, #FFD700);
+            border-radius: 50%;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #8B0000;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .names {
+            font-size: 36px;
+            font-weight: bold;
+            color: #FFD700;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .names small {
+            display: block;
+            font-size: 20px;
+            margin: 2px 0;
+        }
+
+        .ampersand {
+            display: block;
+            font-size: 24px;
+            color: #FFD700;
+            margin: 3px 0;
+            opacity: 0.9;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #FFD700, transparent);
+            margin: 5px 0;
+        }
+
+        .greeting {
+            font-size: 14px;
+            color: #FFD700;
+            margin: 2px 0;
+            font-style: italic;
+        }
+
+        .recipient {
+            font-size: 20px;
+            color: #FFD700;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .invitation-text {
+            font-size: 13px;
+            color: #FFE55C;
+            margin: 5px 0;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .event-info {
+            margin: 15px 0;
+            font-size: 14px;
+            color: #FFE55C;
+            line-height: 1.8;
+        }
+
+        .event-info-row {
+            margin: 8px 0;
+        }
+
+        .event-label {
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        .message-btn {
+            margin-top: 15px;
+            padding: 8px 25px;
+            background: rgba(255, 229, 92, 0.2);
+            color: #FFE55C;
+            border: 2px solid #FFE55C;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .message-btn:hover {
+            background: rgba(255, 229, 92, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .falling-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                top: -50px;
+                opacity: 1;
+            }
+            to {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-duration: 4s; animation-delay: 0s; font-size: 20px; }
+        .heart:nth-child(2) { left: 20%; animation-duration: 5s; animation-delay: 0.5s; font-size: 18px; }
+        .heart:nth-child(3) { left: 30%; animation-duration: 4.5s; animation-delay: 1s; font-size: 22px; }
+        .heart:nth-child(4) { left: 40%; animation-duration: 5.5s; animation-delay: 0.2s; font-size: 19px; }
+        .heart:nth-child(5) { left: 50%; animation-duration: 4.2s; animation-delay: 0.8s; font-size: 21px; }
+        .heart:nth-child(6) { left: 60%; animation-duration: 5.2s; animation-delay: 0.3s; font-size: 20px; }
+        .heart:nth-child(7) { left: 70%; animation-duration: 4.8s; animation-delay: 1.2s; font-size: 22px; }
+        .heart:nth-child(8) { left: 80%; animation-duration: 5.5s; animation-delay: 0.6s; font-size: 18px; }
+        .heart:nth-child(9) { left: 90%; animation-duration: 4.3s; animation-delay: 0.9s; font-size: 21px; }
+        .heart:nth-child(10) { left: 15%; animation-duration: 5.3s; animation-delay: 1.5s; font-size: 19px; }
+
+        @media (max-width: 600px) {
+            .card {
+                width: 90%;
+                height: auto;
+                min-height: 400px;
+            }
+            .names { font-size: 32px; }
+            .names small { font-size: 18px; }
+            .invitation-text { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="falling-hearts">
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="dragon-left"></div>
+            <div class="dragon-right"></div>
+
+            <button class="close-btn" onclick="goBack()">✕</button>
+
+            <div class="luck-coin" style="margin-top: 10px;">囍</div>
+
+            <div class="names" style="margin: 10px 0;">
+                <small>Đình Hải</small>
+                <div class="ampersand">&</div>
+                <small>Huệ Tâm</small>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="greeting">Kính mời</div>
+            <div class="recipient" id="recipientName">Quý vị</div>
+
+            <div class="invitation-text">
+                đến dự buổi tiệc chung vui<br>
+                cùng gia đình
+            </div>
+
+            <div class="event-info">
+                <div class="event-info-row">
+                    <span class="event-label">📅 Ngày:</span><br>
+                    <span id="eventDate"></span>
+                </div>
+                <div class="event-info-row">
+                    <span class="event-label">🕐 Giờ:</span><br>
+                    <span>10:00 sáng</span>
+                </div>
+                <div class="event-info-row">
+                    <span class="event-label">📍 Địa điểm:</span><br>
+                    <span id="eventLocation">Nhà hàng Tiệc Cưới</span>
+                </div>
+            </div>
+
+            <button class="message-btn" onclick="sendMessage()">💬 Gửi lời chúc</button>
+        </div>
+    </div>
+
+    <script>
+        function getGuestName() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('moi') || 'Quý vị';
+        }
+
+        function setDate() {
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+
+            const vietnameseDateText = `${day} tháng ${month}, ${year}`;
+            document.getElementById('eventDate').textContent = vietnameseDateText;
+        }
+
+        function setGuestName() {
+            const guestName = getGuestName();
+            document.getElementById('recipientName').textContent = guestName;
+        }
+
+        function sendMessage() {
+            const guestName = getGuestName();
+            const message = `Cảm ơn lời mời. Tôi sẽ có mặt trong ngày trọng đại của Đình Hải & Huệ Tâm.`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        window.addEventListener('load', function() {
+            setDate();
+            setGuestName();
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                goBack();
+            }
+        });
+    </script>
+</body>
+</html>
