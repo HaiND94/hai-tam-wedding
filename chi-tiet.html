@@ -23,80 +23,107 @@
             background: white;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #A54242 0%, #8B3A3A 100%);
-            padding: 30px;
-            text-align: center;
-            color: white;
+        /* Dragon Header */
+        .dragon-header {
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(90deg, #A54242 0%, #C41E3A 50%, #A54242 100%);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><g opacity="0.4"><path d="M0,50 Q50,20 100,50 T200,50 T300,50 T400,50 T500,50 T600,50 T700,50 T800,50 T900,50 T1000,50" stroke="rgba(255,200,100,0.6)" stroke-width="3" fill="none"/><circle cx="50" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="150" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="250" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="350" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="450" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="550" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="650" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="750" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="850" cy="30" r="4" fill="rgba(255,200,100,0.6)"/><circle cx="950" cy="30" r="4" fill="rgba(255,200,100,0.6)"/></g></svg>');
+            background-repeat: repeat;
         }
 
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        /* Couple Info Section */
-        .couple-section {
+        /* Couple Photo Section */
+        .couple-section-photo {
             padding: 40px 30px;
             text-align: center;
-            background: linear-gradient(to bottom, #FFF9F5 0%, white 100%);
+            background: #FFF9F5;
+            border-bottom: 3px solid #A54242;
         }
 
-        .couple-title {
-            color: #A54242;
-            font-size: 14px;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .couple-names {
+        .couple-photos {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 40px;
+            align-items: flex-start;
+            gap: 60px;
             margin-bottom: 30px;
             flex-wrap: wrap;
+            position: relative;
         }
 
-        .couple-name {
+        .photo-container {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
-        .couple-role {
+        .photo-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #A54242 0%, #8B3A3A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: 5px solid #FFF9F5;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .photo-placeholder span {
+            opacity: 0.8;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .couple-role-photo {
             font-size: 12px;
             color: #A54242;
             letter-spacing: 1px;
-            margin-bottom: 10px;
             text-transform: uppercase;
+            margin-top: 10px;
         }
 
-        .couple-name h2 {
-            font-size: 32px;
+        .photo-container h2 {
+            font-size: 28px;
             color: #8B3A3A;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin: 5px 0;
         }
 
-        .couple-separator {
+        .happiness-symbol {
+            font-size: 80px;
             color: #A54242;
-            font-size: 24px;
-            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            margin: 0 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-banner {
+            background: #A54242;
+            color: white;
+            padding: 12px 0;
+            font-size: 16px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-left: -30px;
+            margin-right: -30px;
+            margin-bottom: -40px;
         }
 
         /* Event Info Section */
         .event-section {
             padding: 40px 30px;
             text-align: center;
-            border-top: 2px solid #E8D7CD;
+            background: white;
             border-bottom: 2px solid #E8D7CD;
         }
 
@@ -430,26 +457,31 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>TRÂN TRỌNG BÁO TIN</h1>
-            <p>LỄ THÀNH HÔN CỦA CON CHÚNG TÔI</p>
-        </div>
+        <!-- Dragon Header -->
+        <div class="dragon-header"></div>
 
-        <!-- Couple Section -->
-        <div class="couple-section">
-            <div class="couple-title">Trưởng Nam & Út Nữ</div>
-            <div class="couple-names">
-                <div class="couple-name">
-                    <div class="couple-role">Trưởng Nam</div>
+        <!-- Couple Section with Photos -->
+        <div class="couple-section-photo">
+            <div class="couple-photos">
+                <div class="photo-container groom">
+                    <div class="photo-placeholder" id="groomPhoto">
+                        <span>Hoàng Nam</span>
+                    </div>
+                    <div class="couple-role-photo">Trưởng Nam</div>
                     <h2>Hoàng Nam</h2>
                 </div>
-                <div class="couple-separator">&</div>
-                <div class="couple-name">
-                    <div class="couple-role">Út Nữ</div>
+
+                <div class="happiness-symbol">囍</div>
+
+                <div class="photo-container bride">
+                    <div class="photo-placeholder" id="bridePhoto">
+                        <span>Thanh Tú</span>
+                    </div>
+                    <div class="couple-role-photo">Út Nữ</div>
                     <h2>Thanh Tú</h2>
                 </div>
             </div>
+            <div class="event-banner">THÔNG TIN LỄ CƯỚI</div>
         </div>
 
         <!-- Event Section -->
