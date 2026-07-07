@@ -531,15 +531,9 @@
                 <button class="submit-btn" onclick="submitWish()">🪄 Gửi Lời Chúc</button>
             </div>
 
-            <div class="comments">
-                <div class="comment">
-                    <div class="comment-author">Anh Tuấn <span class="comment-time">04:50:34 28/1/2026</span></div>
-                    <div class="comment-text">Chúc Hoàng Nam và Thanh Tú trọn đôi bên nhau, cùng sẻ chia những niềm vui và nỗi buồn, vượt qua mọi chông gai.</div>
-                </div>
-                <div class="comment">
-                    <div class="comment-author">An Thư Pháp <span class="comment-time">21:22:07 24/1/2026</span></div>
-                    <div class="comment-text">Mừng ngày trọng đại! Chúc hai bạn cười nhiều hơn cải, yêu nhiều hơn giận.</div>
-                </div>
+            <div class="comments" id="wishesList">
+                <!-- Wishes will be loaded here -->
+                <p style="text-align: center; color: #A54242; padding: 20px;">Đang tải lời chúc...</p>
             </div>
         </div>
 
@@ -603,18 +597,68 @@
             document.getElementById('eventDate').textContent = `CHỦ NHẬT ${day} THÁNG ${month} ${year}`;
         }
 
-        function submitWish() {
-            const name = document.getElementById('guestName').value;
-            const wish = document.getElementById('guestWish').value;
+        // Load wishes from server
+        async function loadWishes() {
+            try {
+                const response = await fetch('/api/wishes');
+                const wishes = await response.json();
+
+                const wishesList = document.getElementById('wishesList');
+                wishesList.innerHTML = '';
+
+                if (wishes.length === 0) {
+                    wishesList.innerHTML = '<p style="text-align: center; color: #A54242; padding: 20px;">Chưa có lời chúc nào. Hãy là người đầu tiên!</p>';
+                    return;
+                }
+
+                wishes.forEach(wish => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.className = 'comment';
+                    commentDiv.innerHTML = `
+                        <div class="comment-author">${wish.name} <span class="comment-time">${wish.time}</span></div>
+                        <div class="comment-text">${wish.wish}</div>
+                    `;
+                    wishesList.appendChild(commentDiv);
+                });
+            } catch (error) {
+                console.error('Error loading wishes:', error);
+                document.getElementById('wishesList').innerHTML = '<p style="text-align: center; color: red; padding: 20px;">Không thể tải lời chúc. Vui lòng kiểm tra server.</p>';
+            }
+        }
+
+        // Submit wish to server
+        async function submitWish() {
+            const name = document.getElementById('guestName').value.trim();
+            const wish = document.getElementById('guestWish').value.trim();
 
             if (!name || !wish) {
                 alert('Vui lòng điền đầy đủ thông tin!');
                 return;
             }
 
-            alert('Cảm ơn lời chúc của bạn! 💕');
-            document.getElementById('guestName').value = '';
-            document.getElementById('guestWish').value = '';
+            try {
+                const response = await fetch('/api/wishes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, wish })
+                });
+
+                if (response.ok) {
+                    alert('Cảm ơn lời chúc của bạn! 💕');
+                    document.getElementById('guestName').value = '';
+                    document.getElementById('guestWish').value = '';
+
+                    // Reload wishes list
+                    await loadWishes();
+                } else {
+                    alert('Có lỗi khi lưu lời chúc. Vui lòng thử lại!');
+                }
+            } catch (error) {
+                console.error('Error submitting wish:', error);
+                alert('Không thể kết nối đến server. Vui lòng kiểm tra kết nối!');
+            }
         }
 
         function confirmAttendance() {
@@ -628,6 +672,7 @@
         window.addEventListener('load', function() {
             generateCalendar();
             setEventDate();
+            loadWishes();
         });
     </script>
 </body>
