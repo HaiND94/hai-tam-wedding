@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết Thiệp Cưới - Đình Hải & Huệ Tâm</title>
+    <title>Đình Hải & Huệ Tâm</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,14 +14,57 @@
 
         body {
             font-family: 'Playfair Display', Georgia, serif;
-            background: #F5EAE0;
+            background: linear-gradient(135deg, #F5EAE0 0%, #FFF5E6 50%, #F0D9C8 100%);
             color: #8B4545;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Subtle background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900"><defs><filter id="dragon-shadow"><feGaussianBlur in="SourceGraphic" stdDeviation="2"/></filter></defs><g opacity="0.05"><ellipse cx="200" cy="150" rx="120" ry="80" fill="none" stroke="rgba(165,66,66,0.3)" stroke-width="2" filter="url(%23dragon-shadow)" transform="skewY(-15)"/><path d="M80,150 Q120,120 160,130 Q180,140 190,160 Q175,175 140,170 Q100,165 80,150" fill="rgba(165,66,66,0.15)" opacity="0.6"/><circle cx="200" cy="120" r="25" fill="rgba(165,66,66,0.2)"/><circle cx="220" cy="125" r="15" fill="rgba(165,66,66,0.15)"/><path d="M160,100 Q170,80 190,95" stroke="rgba(165,66,66,0.2)" stroke-width="2" fill="none"/><path d="M140,160 Q130,180 150,190" stroke="rgba(165,66,66,0.15)" stroke-width="1.5" fill="none"/></g></svg>');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: white;
+            background: #FFF9F5;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 60px rgba(165, 66, 66, 0.1);
+        }
+
+        .container-watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('./data-images/dragon-gold.png');
+            background-repeat: no-repeat;
+            background-position: center 20%;
+            background-size: 60%;
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container > * {
+            position: relative;
+            z-index: 1;
         }
 
         /* Dragon Header */
@@ -35,10 +78,9 @@
 
         /* Couple Photo Section */
         .couple-section-photo {
-            padding: 40px 30px;
+            padding: 40px 30px 60px 30px;
             text-align: center;
             background: #FFF9F5;
-            border-bottom: 3px solid #A54242;
         }
 
         .couple-photos {
@@ -156,16 +198,17 @@
             margin-top: 20px;
             margin-left: -30px;
             margin-right: -30px;
-            margin-bottom: -40px;
+            margin-bottom: 0;
             font-family: 'Cormorant Garamond', serif;
         }
 
         /* Event Info Section */
         .event-section {
-            padding: 50px 30px;
+            padding: 60px 30px;
             text-align: center;
-            background: white;
+            background: #FFF9F5;
             border-bottom: 2px solid #E8D7CD;
+            margin-top: 20px;
         }
 
         .event-title {
@@ -259,6 +302,14 @@
             border-top: 1px solid #E8D7CD;
         }
 
+        .text-detail {
+            color: #070000;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
         .wedding-detail-title {
             color: #8B3A3A;
             font-size: 14px;
@@ -324,10 +375,53 @@
             margin: 20px 0;
         }
 
+        /* Venue Section */
+        .venue-section {
+            padding: 60px 30px;
+            text-align: center;
+            background: #FFF9F5;
+            border-bottom: 2px solid #E8D7CD;
+        }
+
+        .venue-title {
+            color: #A54242;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .venue-address {
+            color: #8B3A3A;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .venue-map {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(165, 66, 66, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .venue-map iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
         /* Calendar Section */
         .calendar-section {
-            padding: 40px 30px;
+            padding: 60px 30px;
             text-align: center;
+            background: #FFF9F5;
+            border-bottom: 2px solid #E8D7CD;
         }
 
         .calendar {
@@ -335,10 +429,8 @@
             border: 1px solid #E8D7CD;
             border-radius: 8px;
             padding: 20px;
-            margin: 20px 0;
+            margin: 30px auto;
             max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .calendar-header {
@@ -400,9 +492,11 @@
 
         /* Timeline Section */
         .timeline-section {
-            padding: 40px 30px;
+            padding: 60px 30px;
             text-align: center;
+            background: #FFF9F5;
             border-top: 2px solid #E8D7CD;
+            border-bottom: 2px solid #E8D7CD;
         }
 
         .timeline-title {
@@ -417,7 +511,7 @@
 
         .timeline {
             max-width: 500px;
-            margin: 0 auto;
+            margin: 30px auto;
         }
 
         .timeline-item {
@@ -450,9 +544,9 @@
 
         /* Album Section */
         .album-section {
-            padding: 40px 30px;
+            padding: 60px 30px;
             text-align: center;
-            background: white;
+            background: #FFF9F5;
             border-bottom: 2px solid #E8D7CD;
         }
 
@@ -460,7 +554,7 @@
             color: #A54242;
             font-size: 20px;
             letter-spacing: 2px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-transform: uppercase;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
@@ -469,11 +563,11 @@
         /* Album Slideshow */
         .album-slideshow {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: #FFF9F5;
             border: 3px solid #A54242;
             border-radius: 8px;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -483,6 +577,7 @@
             padding-bottom: 75%;
             background: #000;
             overflow: hidden;
+            border-radius: 5px;
         }
 
         .slideshow-background {
@@ -538,13 +633,46 @@
             }
         }
 
+        /* Slide Dots Navigation */
+        .slide-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 20px 0 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot:hover {
+            background-color: #bbb;
+            transform: scale(1.2);
+        }
+
+        .dot.active {
+            background-color: #A54242;
+            width: 14px;
+            height: 14px;
+            box-shadow: 0 0 8px rgba(165, 66, 66, 0.5);
+        }
+
 
         /* Guest Book Section */
         .guest-book-section {
-            padding: 40px 30px;
+            padding: 60px 30px;
             text-align: center;
             background: #FFF9F5;
             border-top: 2px solid #E8D7CD;
+            border-bottom: 2px solid #E8D7CD;
         }
 
         .guest-book-title {
@@ -563,7 +691,7 @@
             border-radius: 8px;
             padding: 30px;
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin: 30px auto;
         }
 
         .form-group {
@@ -644,9 +772,12 @@
 
         /* Red Envelope Section */
         .envelope-section {
-            padding: 40px 30px;
+            padding: 60px 30px;
             text-align: center;
+            background: #FFF9F5;
             border-top: 2px solid #E8D7CD;
+            border-bottom: 2px solid #E8D7CD;
+            margin-bottom: 30px;
         }
 
         .envelope-title {
@@ -666,6 +797,7 @@
             border-radius: 8px;
             color: white;
             margin-bottom: 20px;
+            margin-top: 30px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -687,10 +819,11 @@
         /* Footer */
         .footer {
             background: linear-gradient(135deg, #A54242 0%, #8B3A3A 100%);
-            padding: 30px;
+            padding: 50px 30px;
             text-align: center;
             color: white;
             border-top: 2px solid #E8D7CD;
+            margin-top: 20px;
         }
 
         .footer p {
@@ -759,9 +892,155 @@
                 margin: 0 10px;
             }
         }
+
+        /* Flying Dragon 3D Animation */
+        .flying-dragon {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+            z-index: 0;
+            filter: drop-shadow(0 10px 20px rgba(165, 66, 66, 0.15));
+            perspective: 1000px;
+        }
+
+        .dragon-svg {
+            width: 100%;
+            height: 100%;
+            animation: dragonFly 25s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes dragonFly {
+            0% {
+                left: -250px;
+                top: 10%;
+                opacity: 0;
+                transform: rotateY(0deg) rotateX(5deg) scale(0.8);
+            }
+            15% {
+                opacity: 0.3;
+                transform: rotateY(10deg) rotateX(-5deg) scale(1);
+            }
+            50% {
+                left: 50%;
+                top: 15%;
+                opacity: 0.25;
+                transform: rotateY(0deg) rotateX(0deg) scale(1.1);
+            }
+            85% {
+                opacity: 0.3;
+                transform: rotateY(-10deg) rotateX(5deg) scale(1);
+            }
+            100% {
+                left: calc(100% + 250px);
+                top: 8%;
+                opacity: 0;
+                transform: rotateY(0deg) rotateX(-5deg) scale(0.8);
+            }
+        }
+
+        /* Flying Phoenix 3D Animation */
+        .flying-phoenix {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+            z-index: 0;
+            filter: drop-shadow(0 8px 15px rgba(196, 30, 58, 0.12));
+            perspective: 1000px;
+        }
+
+        .phoenix-svg {
+            width: 100%;
+            height: 100%;
+            animation: phoenixFly 30s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes phoenixFly {
+            0% {
+                right: -250px;
+                bottom: 15%;
+                opacity: 0;
+                transform: rotateY(180deg) rotateZ(20deg) scale(0.9);
+            }
+            10% {
+                opacity: 0.28;
+                transform: rotateY(170deg) rotateZ(15deg) scale(1);
+            }
+            50% {
+                right: 45%;
+                bottom: 25%;
+                opacity: 0.22;
+                transform: rotateY(180deg) rotateZ(0deg) scale(1.15);
+            }
+            90% {
+                opacity: 0.28;
+                transform: rotateY(190deg) rotateZ(20deg) scale(1);
+            }
+            100% {
+                right: calc(100% + 250px);
+                bottom: 20%;
+                opacity: 0;
+                transform: rotateY(180deg) rotateZ(25deg) scale(0.9);
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Flying Dragon 3D Animation -->
+    <div class="flying-dragon" id="dragon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="dragon-svg">
+            <defs>
+                <filter id="dragonGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <!-- Dragon Head -->
+            <ellipse cx="160" cy="100" rx="35" ry="40" fill="rgba(165,66,66,0.25)" filter="url(#dragonGlow)"/>
+            <circle cx="175" cy="85" r="8" fill="rgba(165,66,66,0.4)"/>
+            <!-- Dragon Body Curve -->
+            <path d="M130,100 Q100,80 70,100 Q50,120 30,100" stroke="rgba(165,66,66,0.2)" stroke-width="35" fill="none" stroke-linecap="round" filter="url(#dragonGlow)"/>
+            <!-- Dragon Tail -->
+            <path d="M30,100 Q10,110 5,130 Q0,150 20,160" stroke="rgba(165,66,66,0.15)" stroke-width="20" fill="none" stroke-linecap="round"/>
+            <!-- Dragon Horns -->
+            <line x1="165" y1="60" x2="160" y2="35" stroke="rgba(165,66,66,0.3)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="175" y1="60" x2="185" y2="30" stroke="rgba(165,66,66,0.3)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- Flying Phoenix 3D Animation -->
+    <div class="flying-phoenix" id="phoenix">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="phoenix-svg">
+            <defs>
+                <filter id="phoenixGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <!-- Phoenix Head -->
+            <circle cx="140" cy="70" r="30" fill="rgba(196,30,58,0.22)" filter="url(#phoenixGlow)"/>
+            <!-- Phoenix Crest -->
+            <path d="M150,45 Q165,25 170,35 Q165,40 155,40" fill="rgba(196,30,58,0.3)"/>
+            <!-- Phoenix Body -->
+            <ellipse cx="100" cy="100" rx="50" ry="45" fill="rgba(196,30,58,0.18)"/>
+            <!-- Phoenix Wings -->
+            <path d="M80,80 Q50,60 40,100 Q50,130 80,120" fill="rgba(196,30,58,0.15)" opacity="0.7"/>
+            <path d="M120,80 Q150,60 160,100 Q150,130 120,120" fill="rgba(196,30,58,0.15)" opacity="0.7"/>
+            <!-- Phoenix Tail Feathers -->
+            <path d="M70,120 Q40,140 30,170" stroke="rgba(196,30,58,0.2)" stroke-width="15" fill="none" stroke-linecap="round"/>
+            <path d="M100,130 Q85,155 75,185" stroke="rgba(196,30,58,0.15)" stroke-width="12" fill="none" stroke-linecap="round"/>
+        </svg>
+    </div>
+
     <!-- Background Music -->
     <audio id="backgroundMusic" autoplay loop>
         <source src="./music/cuoi_di.mp3" type="audio/mpeg">
@@ -772,6 +1051,9 @@
     <button class="music-toggle playing" id="musicToggle" title="Bật/Tắt nhạc">🎵</button>
 
     <div class="container">
+        <!-- Dragon Watermark Background -->
+        <div class="container-watermark"></div>
+
         <!-- Dragon Header -->
         <div class="dragon-header"></div>
 
@@ -823,15 +1105,18 @@
             <!-- Parents Section -->
             <div class="parents-section">
                 <div class="parents-column">
-                    <div class="parents-label">Ông bà</div>
-                    <div class="parent-name">Trần Văn Tuấn</div>
-                    <div class="parent-name">Trần Thị Mai</div>
+                    <div class="text-detail">Ông bà</div>
+                    <div class="parent-name">Nguyễn Đình Hà</div>
+                    <div class="parent-name">Nguyễn Thị Ngọc</div>
+                    <div class="text-detail">Xóm Động Sơn, xã Vân Tụ, Nghệ An</div>
+
                 </div>
                 <div class="center-separator"></div>
                 <div class="parents-column">
-                    <div class="parents-label">Ông bà</div>
-                    <div class="parent-name">Lê Văn Hùng</div>
-                    <div class="parent-name">Hồ Thị Lan</div>
+                    <div class="text-detail">Ông bà</div>
+                    <div class="parent-name">Lê Thị Nhung</div>
+                    <div class="parent-name">Phan Quân</div>
+                    <div class="text-detail">Xóm Động Sơn, xã Vân Tụ, Nghệ An</div>
                 </div>
             </div>
 
@@ -861,6 +1146,19 @@
 
                 <div class="wedding-year" id="eventYear">2026</div>
                 <div class="lunar-date" id="lunarDate">(Tức ngày 17/06 năm Bính Ngọ)</div>
+            </div>
+        </div>
+
+        <!-- Venue Section -->
+        <div class="venue-section">
+            <div class="event-banner">TIỆC CƯỚI SẼ TỔ CHỨC TẠI</div>
+            <div class="venue-address">
+                <strong>Tự Gia</strong><br>
+                Xóm Động Sơn, Xã Vân Tụ, tỉnh Nghệ An<br>
+                Liên hệ: 098 262 7656
+            </div>
+            <div class="venue-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1738.193903595281!2d105.4186038809325!3d18.907609490643402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139df00286676bd%3A0x772b763def0b690e!2sSakura%20Coffee!5e0!3m2!1sen!2s!4v1783502767875!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
         </div>
 
@@ -925,6 +1223,9 @@
                             <!-- Current slide will be loaded here -->
                         </div>
                     </div>
+                </div>
+                <div class="slide-dots" id="slideDots">
+                    <!-- Dots will be generated here -->
                 </div>
             </div>
         </div>
@@ -1163,11 +1464,38 @@
         const autoPlayDelay = 4000; // 4 seconds
 
         function loadAlbum() {
+            generateDots();
             showSlides();
         }
 
         function getNextIndex(index) {
             return (index + 1) % albumPhotos.length;
+        }
+
+        function generateDots() {
+            const slideDots = document.getElementById('slideDots');
+            slideDots.innerHTML = '';
+
+            albumPhotos.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (index === 0) {
+                    dot.classList.add('active');
+                }
+                dot.addEventListener('click', () => goToSlide(index));
+                slideDots.appendChild(dot);
+            });
+        }
+
+        function updateActiveDot(index) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
         }
 
         function showSlides() {
@@ -1182,10 +1510,18 @@
             // Update background with blurred next image (as transition effect)
             const bgImage = document.getElementById('bgImage');
             bgImage.style.backgroundImage = `url('./data-images/${nextPhoto}')`;
+
+            // Update active dot
+            updateActiveDot(currentSlideIndex);
         }
 
         function nextSlide() {
             currentSlideIndex = getNextIndex(currentSlideIndex);
+            showSlides();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
             showSlides();
         }
 
