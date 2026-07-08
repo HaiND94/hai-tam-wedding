@@ -967,10 +967,16 @@
         .petal {
             position: fixed;
             pointer-events: none;
-            font-size: 32px;
+            width: 26px;
+            height: 26px;
             z-index: 9999;
             opacity: 0.9;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            filter: drop-shadow(0 2px 3px rgba(165, 66, 66, 0.15));
+        }
+
+        .petal svg {
+            width: 100%;
+            height: 100%;
         }
 
         @keyframes fallAndSway {
@@ -1341,8 +1347,8 @@
                 <div class="center-separator"></div>
                 <div class="parents-column">
                     <div class="text-detail">Ông bà</div>
-                    <div class="parent-name">Lê Thị Nhung</div>
                     <div class="parent-name">Phan Hồng Quân</div>
+                    <div class="parent-name">Lê Thị Nhung</div>
                     <div class="text-detail">Xóm 2, xã Vân Tụ, Nghệ An</div>
                 </div>
             </div>
@@ -1839,17 +1845,34 @@
             }
         });
 
+        // Single cherry-blossom petal shape (with notch at the tip)
+        const petalColors = ['#F8C8D8', '#F5B7CB', '#EFA6BE', '#F9D5E0', '#E890AB'];
+
+        function petalSvg(color) {
+            return `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2 C10 12 6 26 14 40 Q17 45 20 40 Q23 45 26 40 C34 26 30 12 20 2 Z"
+                      fill="${color}"/>
+                <path d="M20 8 C16 16 15 28 20 38"
+                      stroke="rgba(0,0,0,0.06)" stroke-width="1.2" fill="none"/>
+            </svg>`;
+        }
+
         // Create falling petals
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal falling';
 
-            const petals = ['🌸', '🏵️', '💮', '🌺'];
-            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+            const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+            petal.innerHTML = petalSvg(color);
 
             const randomLeft = Math.random() * window.innerWidth;
             petal.style.left = randomLeft + 'px';
             petal.style.top = '-50px';
+
+            // Random size for depth variation
+            const size = 16 + Math.random() * 16; // 16-32px
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
 
             const duration = 6 + Math.random() * 3; // 6-9 seconds
             petal.style.animationDuration = duration + 's';
