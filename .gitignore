@@ -1,0 +1,9 @@
+# Dữ liệu runtime — KHÔNG commit (mỗi môi trường có dữ liệu riêng)
+data/*.csv
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
