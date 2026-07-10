@@ -1574,20 +1574,17 @@
             document.getElementById('eventYear').textContent = year;
         }
 
-        // Load wishes from localStorage
-        function loadWishes() {
+        // Load wishes from server (CSV)
+        async function loadWishes() {
             const wishesList = document.getElementById('wishesList');
-            const wishesData = localStorage.getItem('wedding_wishes');
-
-            wishesList.innerHTML = '';
-
-            if (!wishesData) {
-                wishesList.innerHTML = '<p style="text-align: center; color: #A54242; padding: 20px;">Chưa có lời chúc nào. Hãy là người đầu tiên!</p>';
-                return;
-            }
 
             try {
-                const wishes = JSON.parse(wishesData);
+                const response = await fetch('/api/wishes');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const data = await response.json();
+                const wishes = data.wishes || [];
+
+                wishesList.innerHTML = '';
 
                 if (wishes.length === 0) {
                     wishesList.innerHTML = '<p style="text-align: center; color: #A54242; padding: 20px;">Chưa có lời chúc nào. Hãy là người đầu tiên!</p>';
@@ -1599,14 +1596,14 @@
                     const commentDiv = document.createElement('div');
                     commentDiv.className = 'comment';
                     commentDiv.innerHTML = `
-                        <div class="comment-author">${escapeHtml(wish.name)} <span class="comment-time">${wish.time}</span></div>
+                        <div class="comment-author">${escapeHtml(wish.name)} <span class="comment-time">${escapeHtml(wish.time)}</span></div>
                         <div class="comment-text">${escapeHtml(wish.wish)}</div>
                     `;
                     wishesList.appendChild(commentDiv);
                 });
             } catch (error) {
                 console.error('Error loading wishes:', error);
-                wishesList.innerHTML = '<p style="text-align: center; color: #A54242; padding: 20px;">Lỗi khi tải lời chúc.</p>';
+                wishesList.innerHTML = '<p style="text-align: center; color: #A54242; padding: 20px;">Lỗi khi tải lời chúc. (Cần mở qua http://localhost:3000)</p>';
             }
         }
 
@@ -1622,8 +1619,8 @@
             return text.replace(/[&<>"']/g, m => map[m]);
         }
 
-        // Submit wish to localStorage
-        function submitWish() {
+        // Submit wish to server (saved to CSV)
+        async function submitWish() {
             const name = document.getElementById('guestName').value.trim();
             const wish = document.getElementById('guestWish').value.trim();
 
@@ -1632,23 +1629,20 @@
                 return;
             }
 
+            const submitButton = document.querySelector('.submit-btn');
+            if (submitButton) submitButton.disabled = true;
+
             try {
-                // Get existing wishes
-                const wishesData = localStorage.getItem('wedding_wishes');
-                let wishes = wishesData ? JSON.parse(wishesData) : [];
-
-                // Add new wish
-                const now = new Date();
-                const time = now.toLocaleString('vi-VN');
-
-                wishes.push({
-                    name: name,
-                    wish: wish,
-                    time: time
+                const response = await fetch('/api/wishes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name, wish: wish })
                 });
 
-                // Save to localStorage
-                localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error || ('HTTP ' + response.status));
+                }
 
                 // Clear form
                 document.getElementById('guestName').value = '';
@@ -1661,12 +1655,48 @@
                 loadWishes();
             } catch (error) {
                 console.error('Error saving wish:', error);
-                alert('Có lỗi khi lưu lời chúc. Vui lòng thử lại!');
+                alert('Có lỗi khi lưu lời chúc. Vui lòng thử lại! (Cần mở trang qua http://localhost:3000)');
+            } finally {
+                if (submitButton) submitButton.disabled = false;
             }
         }
 
-        function confirmAttendance() {
-            alert('Cảm ơn bạn đã xác nhận tham dự! 🎉');
+        function getGuestName() {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('moi');
+            return name ? name.trim() : '';
+        }
+
+        async function confirmAttendance() {
+            const guestName = getGuestName();
+
+            if (!guestName) {
+                alert('Không tìm thấy tên khách mời trên đường link. Vui lòng dùng link mời được gửi riêng cho bạn.');
+                return;
+            }
+
+            const confirmButton = document.querySelector('.confirm-btn');
+            if (confirmButton) confirmButton.disabled = true;
+
+            try {
+                const response = await fetch('/api/confirm', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: guestName })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error || ('HTTP ' + response.status));
+                }
+
+                alert(`Cảm ơn ${guestName} đã xác nhận sẽ tham dự! 🎉`);
+            } catch (error) {
+                console.error('Error confirming attendance:', error);
+                alert('Có lỗi khi lưu xác nhận. Vui lòng thử lại! (Cần mở trang qua http://localhost:3000)');
+            } finally {
+                if (confirmButton) confirmButton.disabled = false;
+            }
         }
 
         function openEnvelope() {
