@@ -15,7 +15,7 @@ import os
 from datetime import datetime
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-PORT = 3000
+PORT = 80
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 CSV_PATH = os.path.join(DATA_DIR, 'wishes.csv')
