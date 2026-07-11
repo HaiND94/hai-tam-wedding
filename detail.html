@@ -1220,6 +1220,55 @@
                 transform: rotateY(180deg) rotateZ(25deg) scale(0.9);
             }
         }
+
+        /* Custom popup (thay thế alert mặc định của trình duyệt) */
+        #customPopup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 9999;
+            padding: 20px;
+        }
+        #customPopup.show {
+            display: flex;
+        }
+        #customPopup .popup-box {
+            background: #fff;
+            border-radius: 18px;
+            max-width: 360px;
+            width: 100%;
+            padding: 28px 24px 22px;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            animation: popupIn 0.25s ease;
+        }
+        @keyframes popupIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        #customPopup .popup-message {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #444;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+        #customPopup .popup-ok {
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #d4a373, #b5835a);
+            color: #fff;
+            padding: 10px 34px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        #customPopup .popup-ok:hover {
+            filter: brightness(1.05);
+        }
     </style>
 </head>
 <body>
@@ -1530,7 +1579,21 @@
         </div>
     </div>
 
+    <div id="customPopup">
+        <div class="popup-box">
+            <div class="popup-message" id="customPopupMessage"></div>
+            <button type="button" class="popup-ok" onclick="closeCustomPopup()">OK</button>
+        </div>
+    </div>
+
     <script>
+        function showToast(message) {
+            document.getElementById('customPopupMessage').textContent = message;
+            document.getElementById('customPopup').classList.add('show');
+        }
+        function closeCustomPopup() {
+            document.getElementById('customPopup').classList.remove('show');
+        }
         function generateCalendar() {
             const weddingDate = new Date(2026, 6, 30); // July 30, 2026 (month is 0-indexed)
             const year = weddingDate.getFullYear();
@@ -1627,7 +1690,7 @@
             const wish = document.getElementById('guestWish').value.trim();
 
             if (!name || !wish) {
-                alert('Vui lòng điền đầy đủ thông tin!');
+                showToast('Vui lòng điền đầy đủ thông tin!');
                 return;
             }
 
@@ -1651,13 +1714,13 @@
                 document.getElementById('guestWish').value = '';
 
                 // Show success message
-                alert('Cảm ơn lời chúc của bạn! 💕');
+                showToast('Cảm ơn lời chúc của bạn! 💕');
 
                 // Reload wishes list
                 loadWishes();
             } catch (error) {
                 console.error('Error saving wish:', error);
-                alert('Có lỗi khi lưu lời chúc. Vui lòng thử lại! (Cần mở trang qua http://localhost:3000)');
+                showToast('Có lỗi khi lưu lời chúc. Vui lòng thử lại! (Cần mở trang qua http://localhost:3000)');
             } finally {
                 if (submitButton) submitButton.disabled = false;
             }
@@ -1673,7 +1736,7 @@
             const guestName = getGuestName();
 
             if (!guestName) {
-                alert('Không tìm thấy tên khách mời trên đường link. Vui lòng dùng link mời được gửi riêng cho bạn.');
+                showToast('Không tìm thấy tên khách mời trên đường link. Vui lòng dùng link mời được gửi riêng cho bạn.');
                 return;
             }
 
@@ -1692,10 +1755,10 @@
                     throw new Error(err.error || ('HTTP ' + response.status));
                 }
 
-                alert(`Cảm ơn ${guestName} đã xác nhận sẽ tham dự! 🎉`);
+                showToast(`Cảm ơn ${guestName} đã xác nhận sẽ tham dự! 🎉`);
             } catch (error) {
                 console.error('Error confirming attendance:', error);
-                alert('Có lỗi khi lưu xác nhận. Vui lòng thử lại! (Cần mở trang qua http://localhost:3000)');
+                showToast('Có lỗi khi lưu xác nhận. Vui lòng thử lại! (Cần mở trang qua http://localhost:3000)');
             } finally {
                 if (confirmButton) confirmButton.disabled = false;
             }
