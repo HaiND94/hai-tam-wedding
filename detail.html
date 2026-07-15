@@ -511,6 +511,32 @@
             font-weight: 600;
         }
 
+        .timeline-columns {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 700px;
+            margin: 30px auto;
+            flex-wrap: wrap;
+        }
+
+        .timeline-column {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .timeline-column-title {
+            color: #A54242;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: 'Cormorant Garamond', serif;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #E8D7CD;
+        }
+
         .timeline {
             max-width: 500px;
             margin: 30px auto;
@@ -1466,31 +1492,64 @@
         <!-- Timeline Section -->
         <div class="timeline-section">
             <div class="event-banner">Timeline</div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-time">08:00</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">Đón khách</div>
+            <div class="timeline-columns">
+                <!-- Khách chú rể -->
+                <div class="timeline-column">
+                    <div class="timeline-column-title">Khách Chú Rể</div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:00</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Đón khách</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:30</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Khai tiệc</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:15</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Rước dâu</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:45</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Bắt đầu lễ cưới</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:00</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Kết thúc tiệc</div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">08:30</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">Khai tiệc</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">11:15</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">Rước dâu</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">11:45</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">Bắt đầu lễ cưới</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">13:00</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">Kết thúc tiệc</div>
+                <!-- Khách cô dâu -->
+                <div class="timeline-column">
+                    <div class="timeline-column-title">Khách Cô Dâu</div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:30</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Đón khách</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:00</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Khai tiệc</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:40</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Đưa dâu</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:45</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Bắt đầu lễ cưới</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:00</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">Kết thúc tiệc</div>
+                    </div>
                 </div>
             </div>
         </div>
