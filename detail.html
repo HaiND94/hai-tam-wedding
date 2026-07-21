@@ -771,6 +771,33 @@
         .comments {
             max-width: 600px;
             margin: 0 auto;
+            max-height: 450px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        /* Custom scrollbar for the wishes list */
+        .comments::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .comments::-webkit-scrollbar-track {
+            background: #F5E6DE;
+            border-radius: 4px;
+        }
+
+        .comments::-webkit-scrollbar-thumb {
+            background: #C98A8A;
+            border-radius: 4px;
+        }
+
+        .comments::-webkit-scrollbar-thumb:hover {
+            background: #A54242;
+        }
+
+        .comments {
+            scrollbar-width: thin;
+            scrollbar-color: #C98A8A #F5E6DE;
         }
 
         .comment {
@@ -779,6 +806,8 @@
             padding: 20px;
             margin-bottom: 15px;
             border-radius: 4px;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .comment-author {
