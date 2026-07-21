@@ -1180,6 +1180,28 @@
             .couple-separator {
                 margin: 0 10px;
             }
+
+            /* Parents section: stack the two families neatly and center the divider */
+            .parents-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+                margin-bottom: 20px;
+            }
+
+            .parents-column {
+                min-width: 0;
+                width: 100%;
+                max-width: 320px;
+            }
+
+            /* Turn the vertical divider into a centered horizontal one when stacked */
+            .center-separator {
+                width: 60px;
+                height: 2px;
+                margin: 0 auto;
+                align-self: center;
+            }
         }
 
         /* Flying Dragon 3D Animation */
@@ -2089,6 +2111,33 @@
         const backgroundMusic = document.getElementById('backgroundMusic');
         const musicToggle = document.getElementById('musicToggle');
 
+        // Whether the user manually paused the music (so we don't force it back on)
+        let userPausedMusic = false;
+
+        // Start music at the first user interaction (Safari/iOS block autoplay with sound)
+        function enableMusicOnInteraction() {
+            const events = ['touchstart', 'touchend', 'click', 'scroll', 'keydown', 'pointerdown'];
+
+            function tryStart() {
+                if (userPausedMusic) {
+                    cleanup();
+                    return;
+                }
+                backgroundMusic.play()
+                    .then(() => {
+                        musicToggle.classList.add('playing');
+                        cleanup();
+                    })
+                    .catch(() => { /* still blocked, keep listeners for the next gesture */ });
+            }
+
+            function cleanup() {
+                events.forEach(ev => window.removeEventListener(ev, tryStart));
+            }
+
+            events.forEach(ev => window.addEventListener(ev, tryStart, { passive: true }));
+        }
+
         // Attempt to autoplay music
         function playMusic() {
             const playPromise = backgroundMusic.play();
@@ -2098,8 +2147,9 @@
                         musicToggle.classList.add('playing');
                     })
                     .catch(() => {
-                        // Autoplay prevented, user needs to interact first
+                        // Autoplay prevented (Safari/iOS): wait for the first user gesture
                         musicToggle.classList.remove('playing');
+                        enableMusicOnInteraction();
                     });
             }
         }
@@ -2107,9 +2157,11 @@
         // Toggle music on button click
         musicToggle.addEventListener('click', function() {
             if (backgroundMusic.paused) {
+                userPausedMusic = false;
                 backgroundMusic.play();
                 musicToggle.classList.add('playing');
             } else {
+                userPausedMusic = true;
                 backgroundMusic.pause();
                 musicToggle.classList.remove('playing');
             }
