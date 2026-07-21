@@ -1951,6 +1951,10 @@
             return (index + 1) % albumPhotos.length;
         }
 
+        function getPrevIndex(index) {
+            return (index - 1 + albumPhotos.length) % albumPhotos.length;
+        }
+
         function generateDots() {
             const slideDots = document.getElementById('slideDots');
             slideDots.innerHTML = '';
@@ -1999,13 +2003,86 @@
             showSlides();
         }
 
-        function goToSlide(index) {
-            currentSlideIndex = index;
+        function prevSlide() {
+            currentSlideIndex = getPrevIndex(currentSlideIndex);
             showSlides();
         }
 
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            showSlides();
+            resetAutoPlay();
+        }
+
+        let autoPlayTimer = null;
+
         function startAutoPlay() {
-            setInterval(nextSlide, autoPlayDelay);
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+            autoPlayTimer = setInterval(nextSlide, autoPlayDelay);
+        }
+
+        // Reset auto-play timer after a manual navigation so it doesn't jump right away
+        function resetAutoPlay() {
+            startAutoPlay();
+        }
+
+        // Enable horizontal swipe / drag to navigate the album
+        function enableSwipe() {
+            const container = document.querySelector('.slideshow-container');
+            if (!container) return;
+
+            let startX = 0;
+            let startY = 0;
+            let isDragging = false;
+            const threshold = 50; // min horizontal distance (px) to trigger a slide change
+
+            function handleStart(x, y) {
+                startX = x;
+                startY = y;
+                isDragging = true;
+            }
+
+            function handleEnd(x, y) {
+                if (!isDragging) return;
+                isDragging = false;
+                const dx = x - startX;
+                const dy = y - startY;
+                // Only treat as a swipe if mostly horizontal and beyond the threshold
+                if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy)) {
+                    if (dx < 0) {
+                        nextSlide(); // swipe left -> next photo
+                    } else {
+                        prevSlide(); // swipe right -> previous photo
+                    }
+                    resetAutoPlay();
+                }
+            }
+
+            // Touch events (mobile)
+            container.addEventListener('touchstart', (e) => {
+                handleStart(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+
+            container.addEventListener('touchend', (e) => {
+                handleEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+            }, { passive: true });
+
+            // Mouse events (desktop drag)
+            container.addEventListener('mousedown', (e) => {
+                handleStart(e.clientX, e.clientY);
+            });
+
+            container.addEventListener('mouseup', (e) => {
+                handleEnd(e.clientX, e.clientY);
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+
+            // Prevent the image from being dragged as a ghost while swiping
+            container.addEventListener('dragstart', (e) => e.preventDefault());
+            container.style.cursor = 'grab';
         }
 
         // Music Control
@@ -2094,6 +2171,7 @@
             setEventDate();
             loadWishes();
             loadAlbum();
+            enableSwipe();
             startAutoPlay();
             updateCountdown();
             setInterval(updateCountdown, 1000);
